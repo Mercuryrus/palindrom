@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
+
 
 namespace palindrom.logic
 {
@@ -27,7 +27,23 @@ namespace palindrom.logic
             {
                 return "Не палиндром";
             }
+
         }
+        public static string PalindromerTwo(string mainString)
+        {
+            string reverseStringTwo = Reverser(mainString);
+            Console.WriteLine(reverseStringTwo);
+            if (Equals(mainString, reverseStringTwo))
+            {
+                return "Палиндром";
+            }
+            else
+            {
+                return "Не палиндром";
+            }
+
+        }
+
         public static void UserStringOne()
         {
             Console.WriteLine("Введите первую строку");
@@ -42,7 +58,7 @@ namespace palindrom.logic
             switch (selection)
             {
                 case "+":
-                    UserStringTwo();
+                    UserStringTwo(customStringOne);
                     break;
                 case "-":
                     break;
@@ -50,14 +66,27 @@ namespace palindrom.logic
                     break;
             }
         }
-        public static void UserStringTwo()
+        public static void UserStringTwo(string customStringOne)
         {
             Console.WriteLine("Введите вторую строку");
             string stingPatternTwo = @"\.+?|\,+?|\ +?|\-+?|\:+?";
             string inputStringTwo = Console.ReadLine();
             string customStringTwo = inputStringTwo.ToLower();
+            int startIndex;
             customStringTwo = (Regex.Replace(customStringTwo, stingPatternTwo, string.Empty));
             Console.WriteLine(inputStringTwo + " - " + PalindromerOne(customStringTwo));
+            if (customStringOne.Contains(customStringTwo))
+            {
+                startIndex = customStringOne.IndexOf(customStringTwo);
+                Console.WriteLine("Первая строка содержит вторую начиная с " + (startIndex + 1) + " символа");
+            }
+            else
+            {
+                Console.WriteLine("Первая строка не содержит вторую строку");
+            }
+            int c = (int)Console.ReadKey().KeyChar;
+            Console.WriteLine(c);
+
         }
 
     }
